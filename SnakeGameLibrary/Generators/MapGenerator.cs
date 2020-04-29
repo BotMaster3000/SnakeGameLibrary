@@ -10,6 +10,10 @@ namespace SnakeGameLibrary.Generators
     {
         public static IMap GenerateMap(int width, int height)
         {
+            if(width <= 0 || height <= 0)
+            {
+                throw new ArgumentException($"Width or Height invalid: Width[{width}] Height[{height}]");
+            }
             ITile[] tiles = new ITile[width * height];
             int indexCounter = 0;
             for (int xPos = 0; xPos < width; ++xPos)

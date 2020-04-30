@@ -146,5 +146,18 @@ namespace SnakeGameLibrary.Logic.Tests
             gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
             Assert.IsFalse(gameHandler.IsGameOver());
         }
+
+        [TestMethod]
+        public void IsGameOverTest_AllSnakeBodyPartsInSamePosition_IsNotGameOver() // In the scenario of the beginning of the Game
+        {
+            const int Width = 10;
+            const int Height = 10;
+            int startingXPos = rand.Next(0, Width);
+            int startingYPos = rand.Next(0, Height);
+            const int startingSnakeLength = 5;
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
+            Assert.IsFalse(gameHandler.IsGameOver());
+        }
     }
 }

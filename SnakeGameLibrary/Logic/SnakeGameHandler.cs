@@ -18,12 +18,25 @@ namespace SnakeGameLibrary.Logic
 
         public bool IsGameOver()
         {
+            ISnakeBodyPart headBodyPart = Array.Find(Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
             return Snake.BodyParts
-                .Any(bodyPart
+                .Any(bodyPart // Any Bodypart out of Borders
                     => bodyPart.XPos >= GameWidth
                     || bodyPart.XPos < 0
                     || bodyPart.YPos >= GameHeight
-                    || bodyPart.YPos < 0);
+                    || bodyPart.YPos < 0)
+                ||
+                (
+                    Snake.BodyParts // Snakehead hitting other bodypart
+                        .Any(bodyPart
+                            => bodyPart.XPos == headBodyPart.XPos
+                            && bodyPart.YPos == headBodyPart.YPos)
+                    && Snake.BodyParts // Not all bodyparts are in the same position
+                        .Count(bodyPart
+                            => bodyPart.XPos == headBodyPart.XPos
+                            && bodyPart.YPos == headBodyPart.YPos)
+                        != Snake.BodyParts.Length
+                );
         }
 
         public void NextTurn(Directions direction)

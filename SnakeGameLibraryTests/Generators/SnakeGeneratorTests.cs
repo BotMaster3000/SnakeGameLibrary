@@ -41,5 +41,23 @@ namespace SnakeGameLibrary.Generators.Tests
                 }
             }
         }
+
+        [TestMethod]
+        public void GenerateSnakeTest_NegativeLength_ArgumentOutOfRangeException()
+        {
+            int xPos = rand.Next();
+            int yPos = rand.Next();
+            int length = -rand.Next(1000);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => SnakeGenerator.GenerateSnake(xPos, yPos, length));
+        }
+
+        [TestMethod]
+        public void GenerateSnakeTest_ZeroLength_ArgumentOutOfRangeException()
+        {
+            int xPos = rand.Next();
+            int yPos = rand.Next();
+            const int Length = 0;
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => SnakeGenerator.GenerateSnake(xPos, yPos, Length));
+        }
     }
 }

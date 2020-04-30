@@ -4,6 +4,7 @@ using SnakeGameLibrary.Helper;
 using SnakeGameLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SnakeGameLibrary.Logic
@@ -17,7 +18,12 @@ namespace SnakeGameLibrary.Logic
 
         public bool IsGameOver()
         {
-            throw new NotImplementedException();
+            return Snake.BodyParts
+                .Any(bodyPart
+                    => bodyPart.XPos >= GameWidth
+                    || bodyPart.XPos < 0
+                    || bodyPart.YPos >= GameHeight
+                    || bodyPart.YPos < 0);
         }
 
         public void NextTurn(Directions direction)

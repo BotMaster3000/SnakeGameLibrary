@@ -107,5 +107,44 @@ namespace SnakeGameLibrary.Logic.Tests
             SnakeGameHandler gameHandler = new SnakeGameHandler();
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => gameHandler.SetupGame(width, height, snake));
         }
+
+        [TestMethod]
+        public void IsGameOverTest_SnakeOutOfBordersWidth_IsGameOver()
+        {
+            const int Width = 10;
+            const int Height = 10;
+            int startingXPos = rand.Next(Width, 1000);
+            int startingYPos = rand.Next(0, Height);
+            const int startingSnakeLength = 5;
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
+            Assert.IsTrue(gameHandler.IsGameOver());
+        }
+
+        [TestMethod]
+        public void IsGameOverTest_SnakeOutOfBordersHeight_IsGameOver()
+        {
+            const int Width = 10;
+            const int Height = 10;
+            int startingXPos = rand.Next(0, Width);
+            int startingYPos = rand.Next(Height, 1000);
+            const int startingSnakeLength = 5;
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
+            Assert.IsTrue(gameHandler.IsGameOver());
+        }
+
+        [TestMethod]
+        public void IsGameOverTest_SnakeWithinBorders_IsNotGameOver()
+        {
+            const int Width = 10;
+            const int Height = 10;
+            int startingXPos = rand.Next(0, Width);
+            int startingYPos = rand.Next(0, Height);
+            const int startingSnakeLength = 5;
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
+            Assert.IsFalse(gameHandler.IsGameOver());
+        }
     }
 }

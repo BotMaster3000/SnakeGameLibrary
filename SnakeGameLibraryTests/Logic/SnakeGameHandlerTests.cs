@@ -81,5 +81,31 @@ namespace SnakeGameLibrary.Logic.Tests
             Assert.AreEqual(height, gameHandler.GameHeight);
             Assert.AreEqual(snake, gameHandler.Snake);
         }
+
+        [TestMethod]
+        public void SetupGameSnakeParameterTest_NegativeWidth_ArgumentOutOfRangeException()
+        {
+            int width = -rand.Next();
+            int height = rand.Next();
+            int startingXPos = rand.Next();
+            int startingYPos = rand.Next();
+            int startingSnakeLength = rand.Next(1000);
+            ISnake snake = SnakeGenerator.GenerateSnake(startingXPos, startingYPos, startingSnakeLength);
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => gameHandler.SetupGame(width, height, snake));
+        }
+
+        [TestMethod]
+        public void SetupGameSnakeParameterTest_NegativeHeight_ArgumentOutOfRangeException()
+        {
+            int width = rand.Next();
+            int height = -rand.Next();
+            int startingXPos = rand.Next();
+            int startingYPos = rand.Next();
+            int startingSnakeLength = rand.Next(1000);
+            ISnake snake = SnakeGenerator.GenerateSnake(startingXPos, startingYPos, startingSnakeLength);
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => gameHandler.SetupGame(width, height, snake));
+        }
     }
 }

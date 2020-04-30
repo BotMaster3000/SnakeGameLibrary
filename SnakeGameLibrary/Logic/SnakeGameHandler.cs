@@ -1,5 +1,6 @@
 ﻿using SnakeGameLibrary.Enums;
 using SnakeGameLibrary.Generators;
+using SnakeGameLibrary.Helper;
 using SnakeGameLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace SnakeGameLibrary.Logic
 
         public void SetupGame(int gameWidth, int gameHeight, int snakeStartingXPos, int snakeStartingYPos, int snakeStartingLength)
         {
+            ExceptionHelper.ThrowArgumentOutOfRangeIfZeroOrLower(nameof(gameWidth), gameWidth);
+            ExceptionHelper.ThrowArgumentOutOfRangeIfZeroOrLower(nameof(gameHeight), gameHeight);
             GameWidth = gameWidth;
             GameHeight = gameHeight;
             Snake = SnakeGenerator.GenerateSnake(snakeStartingXPos, snakeStartingYPos, snakeStartingLength);

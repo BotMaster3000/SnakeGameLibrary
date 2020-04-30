@@ -27,5 +27,41 @@ namespace SnakeGameLibrary.Logic.Tests
             Assert.AreEqual(startingYPos, gameHandler.Snake.BodyParts[0].YPos);
             Assert.AreEqual(startingSnakeLength, gameHandler.Snake.BodyParts.Length);
         }
+
+        [TestMethod]
+        public void SetupGameTest_NegativeWidth_ArgumentOutOfRangeException()
+        {
+            int width = -rand.Next();
+            int height = rand.Next();
+            int startingXPos = rand.Next();
+            int startingYPos = rand.Next();
+            int startingSnakeLength = rand.Next(1000);
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => gameHandler.SetupGame(width, height, startingXPos, startingYPos, startingSnakeLength));
+        }
+
+        [TestMethod]
+        public void SetupGameTest_NegativeHeight_ArgumentOutOfRangeException()
+        {
+            int width = rand.Next();
+            int height = -rand.Next();
+            int startingXPos = rand.Next();
+            int startingYPos = rand.Next();
+            int startingSnakeLength = rand.Next(1000);
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => gameHandler.SetupGame(width, height, startingXPos, startingYPos, startingSnakeLength));
+        }
+
+        [TestMethod]
+        public void SetupGameTest_InvalidSnakeLength_ArgumentOutOfRangeException()
+        {
+            int width = rand.Next();
+            int height = rand.Next();
+            int startingXPos = rand.Next();
+            int startingYPos = rand.Next();
+            int startingSnakeLength = -rand.Next(1000);
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => gameHandler.SetupGame(width, height, startingXPos, startingYPos, startingSnakeLength));
+        }
     }
 }

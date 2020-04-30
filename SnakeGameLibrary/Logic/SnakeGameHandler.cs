@@ -27,16 +27,17 @@ namespace SnakeGameLibrary.Logic
 
         public void SetupGame(int gameWidth, int gameHeight, int snakeStartingXPos, int snakeStartingYPos, int snakeStartingLength)
         {
-            ExceptionHelper.ThrowArgumentOutOfRangeIfZeroOrLower(nameof(gameWidth), gameWidth);
-            ExceptionHelper.ThrowArgumentOutOfRangeIfZeroOrLower(nameof(gameHeight), gameHeight);
-            GameWidth = gameWidth;
-            GameHeight = gameHeight;
-            Snake = SnakeGenerator.GenerateSnake(snakeStartingXPos, snakeStartingYPos, snakeStartingLength);
+            ISnake snake = SnakeGenerator.GenerateSnake(snakeStartingXPos, snakeStartingYPos, snakeStartingLength);
+            SetupGame(gameWidth, gameHeight, snake);
         }
 
         public void SetupGame(int gameWidth, int gameHeight, ISnake snake)
         {
-            throw new NotImplementedException();
+            ExceptionHelper.ThrowArgumentOutOfRangeIfZeroOrLower(nameof(gameWidth), gameWidth);
+            ExceptionHelper.ThrowArgumentOutOfRangeIfZeroOrLower(nameof(gameHeight), gameHeight);
+            GameWidth = gameWidth;
+            GameHeight = gameHeight;
+            Snake = snake;
         }
     }
 }

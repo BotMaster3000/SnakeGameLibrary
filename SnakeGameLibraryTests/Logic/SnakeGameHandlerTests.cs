@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SnakeGameLibrary.Generators;
+using SnakeGameLibrary.Interfaces;
 using SnakeGameLibrary.Logic;
 using System;
 using System.Collections.Generic;
@@ -62,6 +64,22 @@ namespace SnakeGameLibrary.Logic.Tests
             int startingSnakeLength = -rand.Next(1000);
             SnakeGameHandler gameHandler = new SnakeGameHandler();
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => gameHandler.SetupGame(width, height, startingXPos, startingYPos, startingSnakeLength));
+        }
+
+        [TestMethod]
+        public void SetupGameSnakeParameterTest()
+        {
+            int width = rand.Next();
+            int height = rand.Next();
+            int startingXPos = rand.Next();
+            int startingYPos = rand.Next();
+            int startingSnakeLength = rand.Next(1000);
+            ISnake snake = SnakeGenerator.GenerateSnake(startingXPos, startingYPos, startingSnakeLength);
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            gameHandler.SetupGame(width, height, snake);
+            Assert.AreEqual(width, gameHandler.GameWidth);
+            Assert.AreEqual(height, gameHandler.GameHeight);
+            Assert.AreEqual(snake, gameHandler.Snake);
         }
     }
 }

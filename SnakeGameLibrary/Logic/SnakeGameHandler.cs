@@ -41,7 +41,7 @@ namespace SnakeGameLibrary.Logic
 
         public void NextTurn(Directions direction)
         {
-            throw new NotImplementedException();
+            Snake.Move(direction);
         }
 
         public void SetupGame(int gameWidth, int gameHeight, int snakeStartingXPos, int snakeStartingYPos, int snakeStartingLength)

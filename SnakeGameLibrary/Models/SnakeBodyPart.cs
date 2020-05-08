@@ -8,8 +8,8 @@ namespace SnakeGameLibrary.Models
     internal class SnakeBodyPart : ISnakeBodyPart
     {
         public bool IsSnakeHead { get; }
-        public int XPos { get; }
-        public int YPos { get; }
+        public int XPos { get; private set; }
+        public int YPos { get; private set; }
         public ISnakeBodyPart NextBodyPart { get; }
 
         internal SnakeBodyPart(int xPos, int yPos, bool isSnakeHead, ISnakeBodyPart nextBodyPart)
@@ -18,6 +18,12 @@ namespace SnakeGameLibrary.Models
             YPos = yPos;
             IsSnakeHead = isSnakeHead;
             NextBodyPart = nextBodyPart;
+        }
+
+        public void SetPosition(int xPos, int yPos)
+        {
+            XPos = xPos;
+            YPos = yPos;
         }
     }
 }

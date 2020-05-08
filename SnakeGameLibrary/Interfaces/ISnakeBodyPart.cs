@@ -10,5 +10,7 @@ namespace SnakeGameLibrary.Interfaces
         int XPos { get; }
         int YPos { get; }
         ISnakeBodyPart NextBodyPart { get; }
+
+        void SetPosition(int xPos, int yPos);
     }
 }

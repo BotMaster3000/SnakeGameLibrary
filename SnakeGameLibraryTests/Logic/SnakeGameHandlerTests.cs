@@ -4,6 +4,7 @@ using SnakeGameLibrary.Interfaces;
 using SnakeGameLibrary.Logic;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SnakeGameLibrary.Logic.Tests
@@ -158,6 +159,78 @@ namespace SnakeGameLibrary.Logic.Tests
             SnakeGameHandler gameHandler = new SnakeGameHandler();
             gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
             Assert.IsFalse(gameHandler.IsGameOver());
+        }
+
+        [TestMethod]
+        public void NextTurnTest_DirectionLeft()
+        {
+            const int Width = 10;
+            const int Height = 10;
+            const int startingXPos = 5;
+            const int startingYPos = 5;
+            const int startingSnakeLength = 1;
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
+            const int expectedXPosition = startingXPos - 1;
+            const int expectedYPosition = startingYPos;
+            gameHandler.NextTurn(Enums.Directions.Left);
+            ISnakeBodyPart snakeHead = Array.Find(gameHandler.Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
+            Assert.AreEqual(expectedXPosition, snakeHead.XPos);
+            Assert.AreEqual(expectedYPosition, snakeHead.YPos);
+        }
+
+        [TestMethod]
+        public void NextTurnTest_DirectionRight()
+        {
+            const int Width = 10;
+            const int Height = 10;
+            const int startingXPos = 5;
+            const int startingYPos = 5;
+            const int startingSnakeLength = 1;
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
+            const int expectedXPosition = startingXPos + 1;
+            const int expectedYPosition = startingYPos;
+            gameHandler.NextTurn(Enums.Directions.Right);
+            ISnakeBodyPart snakeHead = Array.Find(gameHandler.Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
+            Assert.AreEqual(expectedXPosition, snakeHead.XPos);
+            Assert.AreEqual(expectedYPosition, snakeHead.YPos);
+        }
+
+        [TestMethod]
+        public void NextTurnTest_DirectionUp()
+        {
+            const int Width = 10;
+            const int Height = 10;
+            const int startingXPos = 5;
+            const int startingYPos = 5;
+            const int startingSnakeLength = 1;
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
+            const int expectedXPosition = startingXPos;
+            const int expectedYPosition = startingYPos - 1;
+            gameHandler.NextTurn(Enums.Directions.Up);
+            ISnakeBodyPart snakeHead = Array.Find(gameHandler.Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
+            Assert.AreEqual(expectedXPosition, snakeHead.XPos);
+            Assert.AreEqual(expectedYPosition, snakeHead.YPos);
+        }
+
+        [TestMethod]
+        public void NextTurnTest_DirectionDown()
+        {
+            const int Width = 10;
+            const int Height = 10;
+            const int startingXPos = 5;
+            const int startingYPos = 5;
+            const int startingSnakeLength = 1;
+            SnakeGameHandler gameHandler = new SnakeGameHandler();
+            gameHandler.SetupGame(Width, Height, startingXPos, startingYPos, startingSnakeLength);
+            const int expectedXPosition = startingXPos;
+            const int expectedYPosition = startingYPos + 1;
+            gameHandler.NextTurn(Enums.Directions.Down);
+            ISnakeBodyPart snakeHead = Array.Find(gameHandler.Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
+            Assert.AreEqual(expectedXPosition, snakeHead.XPos);
+            Assert.AreEqual(expectedYPosition, snakeHead.YPos);
         }
     }
 }

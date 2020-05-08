@@ -28,7 +28,7 @@ namespace SnakeGameLibrary.Logic.Tests
             Assert.AreEqual(height, gameHandler.GameHeight);
             Assert.AreEqual(startingXPos, gameHandler.Snake.BodyParts[0].XPos);
             Assert.AreEqual(startingYPos, gameHandler.Snake.BodyParts[0].YPos);
-            Assert.AreEqual(startingSnakeLength, gameHandler.Snake.BodyParts.Length);
+            Assert.AreEqual(startingSnakeLength, gameHandler.Snake.BodyParts.Count);
         }
 
         [TestMethod]
@@ -174,7 +174,7 @@ namespace SnakeGameLibrary.Logic.Tests
             const int expectedXPosition = startingXPos - 1;
             const int expectedYPosition = startingYPos;
             gameHandler.NextTurn(Enums.Directions.Left);
-            ISnakeBodyPart snakeHead = Array.Find(gameHandler.Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
+            ISnakeBodyPart snakeHead = gameHandler.Snake.BodyParts.First(bodyPart => bodyPart.IsSnakeHead);
             Assert.AreEqual(expectedXPosition, snakeHead.XPos);
             Assert.AreEqual(expectedYPosition, snakeHead.YPos);
         }
@@ -192,7 +192,7 @@ namespace SnakeGameLibrary.Logic.Tests
             const int expectedXPosition = startingXPos + 1;
             const int expectedYPosition = startingYPos;
             gameHandler.NextTurn(Enums.Directions.Right);
-            ISnakeBodyPart snakeHead = Array.Find(gameHandler.Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
+            ISnakeBodyPart snakeHead = gameHandler.Snake.BodyParts.First(bodyPart => bodyPart.IsSnakeHead);
             Assert.AreEqual(expectedXPosition, snakeHead.XPos);
             Assert.AreEqual(expectedYPosition, snakeHead.YPos);
         }
@@ -210,7 +210,7 @@ namespace SnakeGameLibrary.Logic.Tests
             const int expectedXPosition = startingXPos;
             const int expectedYPosition = startingYPos - 1;
             gameHandler.NextTurn(Enums.Directions.Up);
-            ISnakeBodyPart snakeHead = Array.Find(gameHandler.Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
+            ISnakeBodyPart snakeHead = gameHandler.Snake.BodyParts.First(bodyPart => bodyPart.IsSnakeHead);
             Assert.AreEqual(expectedXPosition, snakeHead.XPos);
             Assert.AreEqual(expectedYPosition, snakeHead.YPos);
         }
@@ -228,7 +228,7 @@ namespace SnakeGameLibrary.Logic.Tests
             const int expectedXPosition = startingXPos;
             const int expectedYPosition = startingYPos + 1;
             gameHandler.NextTurn(Enums.Directions.Down);
-            ISnakeBodyPart snakeHead = Array.Find(gameHandler.Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
+            ISnakeBodyPart snakeHead = gameHandler.Snake.BodyParts.First(bodyPart => bodyPart.IsSnakeHead);
             Assert.AreEqual(expectedXPosition, snakeHead.XPos);
             Assert.AreEqual(expectedYPosition, snakeHead.YPos);
         }

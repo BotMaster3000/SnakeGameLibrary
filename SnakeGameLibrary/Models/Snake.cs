@@ -2,13 +2,14 @@
 using SnakeGameLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SnakeGameLibrary.Models
 {
     internal class Snake : ISnake
     {
-        public ISnakeBodyPart[] BodyParts { get; }
+        public IList<ISnakeBodyPart> BodyParts { get; }
 
         internal Snake(ISnakeBodyPart[] bodyParts)
         {
@@ -33,11 +34,11 @@ namespace SnakeGameLibrary.Models
                     --xPosIncrement;
                     break;
             }
-            ISnakeBodyPart currentBodyPart = BodyParts[0];
+            ISnakeBodyPart currentBodyPart = BodyParts.First();
             int previousSnakeBodyPartXPosition = currentBodyPart.XPos;
             int previousSnakeBodyPartYPosition = currentBodyPart.YPos;
             currentBodyPart.SetPosition(currentBodyPart.XPos + xPosIncrement, currentBodyPart.YPos + yPosIncrement);
-            for (int i = 1; i < BodyParts.Length; ++i)
+            for (int i = 1; i < BodyParts.Count; ++i)
             {
                 currentBodyPart = BodyParts[i];
                 currentBodyPart.SetPosition(previousSnakeBodyPartXPosition, previousSnakeBodyPartYPosition);

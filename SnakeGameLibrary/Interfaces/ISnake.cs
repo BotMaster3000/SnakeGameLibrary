@@ -7,7 +7,7 @@ namespace SnakeGameLibrary.Interfaces
 {
     public interface ISnake
     {
-        ISnakeBodyPart[] BodyParts { get; }
+        IList<ISnakeBodyPart> BodyParts { get; }
         void Move(Directions direction);
     }
 }

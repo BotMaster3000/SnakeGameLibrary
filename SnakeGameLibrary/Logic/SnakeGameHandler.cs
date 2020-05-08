@@ -18,7 +18,7 @@ namespace SnakeGameLibrary.Logic
 
         public bool IsGameOver()
         {
-            ISnakeBodyPart headBodyPart = Array.Find(Snake.BodyParts, bodyPart => bodyPart.IsSnakeHead);
+            ISnakeBodyPart headBodyPart = Snake.BodyParts.First(bodypart => bodypart.IsSnakeHead);
             return Snake.BodyParts
                 .Any(bodyPart // Any Bodypart out of Borders
                     => bodyPart.XPos >= GameWidth
@@ -35,7 +35,7 @@ namespace SnakeGameLibrary.Logic
                         .Count(bodyPart
                             => bodyPart.XPos == headBodyPart.XPos
                             && bodyPart.YPos == headBodyPart.YPos)
-                        != Snake.BodyParts.Length
+                        != Snake.BodyParts.Count
                 );
         }
 

@@ -19,8 +19,8 @@ namespace SnakeGameLibrary.Generators.Tests
             int yPos = rand.Next(1000);
             int length = rand.Next(1000);
             ISnake snake = SnakeGenerator.GenerateSnake(xPos, yPos, length);
-            Assert.AreEqual(length, snake.BodyParts.Length);
-            for (int i = 0; i < snake.BodyParts.Length; ++i)
+            Assert.AreEqual(length, snake.BodyParts.Count);
+            for (int i = 0; i < snake.BodyParts.Count; ++i)
             {
                 if (i == 0)
                 {
@@ -31,7 +31,7 @@ namespace SnakeGameLibrary.Generators.Tests
                     Assert.IsFalse(snake.BodyParts[i].IsSnakeHead);
                 }
 
-                if (i == snake.BodyParts.Length - 1)
+                if (i == snake.BodyParts.Count - 1)
                 {
                     Assert.IsNull(snake.BodyParts[i].NextBodyPart);
                 }
